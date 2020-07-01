@@ -7,7 +7,7 @@ Simply embed your Youtube video iframe in the usual way and this script will tak
 
 <strong>Tweak the CSS</strong>
 
-Change the presentation ro suit your website.
+Change the presentation to suit your website.
 
 <strong>Requires jQuery</strong>
 
