@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleaner Youtube</title>
+
+    <style>
+       .ytvideo {
+            position: relative;
+            width: 560px;
+            display: block;
+            background: #000;
+            border-radius: 10px;
+            cursor: pointer;
+       }
+       .ytvideo::before {
+           content: '';
+           display: block;
+           width: 90px;
+           height: 60px;
+           position: absolute;
+           top: calc(50% - 30px);
+           left: calc(50% - 40px);
+           background: url('play.svg') no-repeat center;
+           background-size: contain;
+           z-index: 99;
+           
+       }
+       .ytvideo img {
+            width: 100%;
+            height: auto;
+            opacity: .5;
+            display: block;
+            border-radius: 10px
+       }
+       p {
+           font-family: Arial;
+       }
+   </style>
+
+</head>
+<body>
+    
+    
+
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'></script>
+    <script>
+        $( document ).ready(function() {
+            /* Get the iframe URL from the src */
+            var url = $('iframe').attr('src');
+
+            /* Get the video ID from (everything after the last slash of the URL) */
+            id = /[^/]*$/.exec(url)[0];
+
+            /* 
+                Insert high quality thumbnail. Options are:
+
+                maxresdefault   (Maximum resolution)
+                default         (Default thumbnail)
+                hqdefault       (High quality)
+                mqdefault       (Medium quality)
+                sddefault       (Standard definition)
+            */
+            $('<div class="ytvideo"><img src="https://img.youtube.com/vi/' + id + '/maxresdefault.jpg" /></div>').insertBefore('iframe');
+
+            /* 
+                Get the title from the ID and insert it after the .ytvideo container.
+                More responses here: https://noembed.com/
+            */
+            $.getJSON('https://noembed.com/embed',
+                {format: 'json', url: url}, function (data) {
+                $('<p>' + data.title + '</p>').insertAfter('.ytvideo');
+            });
+
+            /* Insert the iframe code onclick and remove the .ytvideo container */
+            $('.ytvideo').on('click',function(){
+                $('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + id + '?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>').insertBefore('.ytvideo');
+                $('.ytvideo').remove();
+            });
+
+            /* Remove the iframe (may improve page performance) */
+            $('iframe').remove();
+        });
+    </script>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/O4iGNXsqghs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+</body>
+</html>
