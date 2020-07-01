@@ -37,4 +37,6 @@ A clean interface is constructed with a thumbnail and SVG, wrapped in a containe
 
 When using on a mobile device it requires two taps, and the video does not auto-play.
 
+## What It Looks Like
+
 <img src="demo.gif" />
