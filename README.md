@@ -33,4 +33,8 @@ The iframe must be placed after the script.
 
 A clean interface is constructed with a thumbnail and SVG, wrapped in a container div. Upon clicking anywhere in the div, the image is swapped out with an auto-play version the original Youtube embed iframe.
 
+## Known Issue
+
+When using on a mobile device it requires two taps, and the video does not auto-play.
+
 <img src="demo.gif" />
